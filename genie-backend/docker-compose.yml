@@ -1,0 +1,222 @@
+# Stock Agent Genie Backend Docker Compose Configuration
+# 提供完整的开发和生产环境部署方案
+
+version: '3.8'
+
+services:
+  # MySQL 数据库服务
+  mysql:
+    image: mysql:8.0
+    container_name: stock-agent-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-StockAgent@2024}
+      MYSQL_DATABASE: ${DB_NAME:-stock_agent_genie}
+      MYSQL_USER: ${DB_USERNAME:-stockagent}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-StockAgent@2024}
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./sql/init:/docker-entrypoint-initdb.d
+      - ./sql/conf/my.cnf:/etc/mysql/conf.d/my.cnf:ro
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --innodb-buffer-pool-size=256M
+      --max-connections=200
+      --sql-mode=STRICT_TRANS_TABLES,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO
+    networks:
+      - stock-agent-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # Redis 缓存服务
+  redis:
+    image: redis:7.2-alpine
+    container_name: stock-agent-redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - stock-agent-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  # Stock Agent Genie Backend 应用服务
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: stock-agent/genie-backend:latest
+    container_name: stock-agent-backend
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      # Spring 配置
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-prod}
+      SERVER_PORT: ${SERVER_PORT:-8080}
+      
+      # 数据库配置
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-stock_agent_genie}
+      DB_USERNAME: ${DB_USERNAME:-stockagent}
+      DB_PASSWORD: ${DB_PASSWORD:-StockAgent@2024}
+      
+      # Redis 配置
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+      
+      # JVM 配置
+      JAVA_OPTS: >
+        -Xms512m -Xmx2g
+        -XX:+UseG1GC
+        -XX:+UseStringDeduplication
+        -XX:MaxGCPauseMillis=200
+        -XX:+UnlockExperimentalVMOptions
+        -XX:+UseJVMCICompiler
+        -Dfile.encoding=UTF-8
+        -Duser.timezone=Asia/Shanghai
+        -Djava.security.egd=file:/dev/./urandom
+      
+      # 应用配置
+      LOGGING_LEVEL_ROOT: ${LOGGING_LEVEL:-INFO}
+      MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: health,info,metrics,prometheus
+      
+      # 智能体配置
+      STOCK_AGENT_AI_OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      STOCK_AGENT_AI_OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://api.openai.com}
+      
+      # 工作流配置
+      STOCK_AGENT_WORKFLOW_ENGINE_MAX_CONCURRENT_EXECUTIONS: ${WORKFLOW_MAX_CONCURRENT:-10}
+      STOCK_AGENT_WORKFLOW_ENGINE_EXECUTION_TIMEOUT: ${WORKFLOW_TIMEOUT:-300000}
+      
+      # MCP 工具配置
+      STOCK_AGENT_MCP_TIMEOUT: ${MCP_TIMEOUT:-30000}
+      STOCK_AGENT_MCP_MAX_RETRIES: ${MCP_MAX_RETRIES:-3}
+    ports:
+      - "${SERVER_PORT:-8080}:8080"
+    volumes:
+      - backend_logs:/app/logs
+      - backend_data:/app/data
+      - ./config:/app/config:ro
+    networks:
+      - stock-agent-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.stock-agent-backend.rule=Host(`api.stockagent.local`)"
+      - "traefik.http.services.stock-agent-backend.loadbalancer.server.port=8080"
+
+  # Nginx 反向代理（可选）
+  nginx:
+    image: nginx:alpine
+    container_name: stock-agent-nginx
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "${NGINX_PORT:-80}:80"
+      - "${NGINX_SSL_PORT:-443}:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - nginx_logs:/var/log/nginx
+    networks:
+      - stock-agent-network
+    profiles:
+      - nginx
+
+  # Prometheus 监控（可选）
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: stock-agent-prometheus
+    restart: unless-stopped
+    ports:
+      - "${PROMETHEUS_PORT:-9090}:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - stock-agent-network
+    profiles:
+      - monitoring
+
+  # Grafana 可视化（可选）
+  grafana:
+    image: grafana/grafana:latest
+    container_name: stock-agent-grafana
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+    ports:
+      - "${GRAFANA_PORT:-3000}:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin}
+      GF_USERS_ALLOW_SIGN_UP: false
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+    networks:
+      - stock-agent-network
+    profiles:
+      - monitoring
+
+# 网络配置
+networks:
+  stock-agent-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+# 数据卷配置
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
+  backend_logs:
+    driver: local
+  backend_data:
+    driver: local
+  nginx_logs:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local

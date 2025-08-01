@@ -1,0 +1,368 @@
+# Stock Agent Genie Backend 测试环境配置
+# 用于单元测试和集成测试
+
+spring:
+  application:
+    name: stock-agent-genie-test
+  
+  # 数据源配置 - 使用H2内存数据库
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 1
+      connection-timeout: 10000
+      idle-timeout: 300000
+      max-lifetime: 900000
+  
+  # JPA配置
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+        use_sql_comments: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+    defer-datasource-initialization: true
+  
+  # H2控制台配置
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+  
+  # Redis配置 - 使用嵌入式Redis
+  data:
+    redis:
+      host: localhost
+      port: 6370  # 使用不同端口避免冲突
+      database: 1
+      timeout: 5000ms
+      lettuce:
+        pool:
+          max-active: 5
+          max-idle: 3
+          min-idle: 1
+          max-wait: 5000ms
+  
+  # 缓存配置
+  cache:
+    type: simple  # 使用简单缓存
+  
+  # Jackson配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    serialization:
+      write-dates-as-timestamps: false
+      fail-on-empty-beans: false
+    deserialization:
+      fail-on-unknown-properties: false
+  
+  # 文件上传配置
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 5MB
+  
+  # 测试配置
+  test:
+    database:
+      replace: none
+
+# 服务器配置
+server:
+  port: 0  # 随机端口
+  servlet:
+    context-path: /api
+
+# 监控配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+# 日志配置
+logging:
+  level:
+    root: WARN
+    com.jd.genie: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.testcontainers: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Stock Agent 测试配置
+stock-agent:
+  # AI配置
+  ai:
+    openai:
+      api-key: test-api-key
+      base-url: http://localhost:8080/mock-openai
+      model: gpt-3.5-turbo
+      max-tokens: 1000
+      temperature: 0.7
+      timeout: 30000
+  
+  # 智能体配置
+  agents:
+    stock-analyst:
+      enabled: true
+      max-concurrent: 2
+      timeout: 60000
+      max-retries: 2
+    
+    market-analyst:
+      enabled: true
+      max-concurrent: 2
+      timeout: 60000
+      max-retries: 2
+    
+    advisor:
+      enabled: true
+      max-concurrent: 2
+      timeout: 60000
+      max-retries: 2
+  
+  # 智能体协调器配置
+  orchestrator:
+    max-concurrent-tasks: 5
+    task-timeout: 120000
+    max-retries: 2
+    retry-delay: 2000
+    thread-pool:
+      core-size: 2
+      max-size: 5
+      queue-capacity: 50
+      keep-alive: 60
+  
+  # 工作流配置
+  workflow:
+    engine:
+      max-concurrent-executions: 5
+      execution-timeout: 180000
+      max-retries: 2
+      retry-delay: 3000
+      thread-pool:
+        core-size: 2
+        max-size: 5
+        queue-capacity: 50
+        keep-alive: 60
+    
+    # 节点执行器配置
+    executors:
+      start:
+        timeout: 5000
+      end:
+        timeout: 5000
+      agent:
+        timeout: 60000
+        max-retries: 2
+      condition:
+        timeout: 10000
+      loop:
+        timeout: 120000
+        max-iterations: 100
+      script:
+        timeout: 30000
+        max-memory: 128MB
+      http:
+        timeout: 30000
+        max-retries: 2
+      delay:
+        max-delay: 60000
+      notification:
+        timeout: 15000
+        max-retries: 2
+    
+    # 工作流引擎配置
+    engine-config:
+      enable-metrics: true
+      enable-tracing: false
+      cleanup-interval: 300000
+      max-history-days: 7
+  
+  # MCP工具配置
+  mcp:
+    timeout: 15000
+    max-retries: 2
+    retry-delay: 1000
+    health-check:
+      enabled: true
+      interval: 30000
+      timeout: 5000
+    tools:
+      stock-data-fetcher:
+        enabled: true
+        timeout: 10000
+      news-fetcher:
+        enabled: true
+        timeout: 10000
+      technical-analyzer:
+        enabled: true
+        timeout: 15000
+      fundamental-analyzer:
+        enabled: true
+        timeout: 15000
+      report-generator:
+        enabled: true
+        timeout: 20000
+  
+  # WebSocket配置
+  websocket:
+    max-connections: 10
+    message-size-limit: 32768
+    heartbeat-interval: 30000
+    connection-timeout: 60000
+    
+    # 端点配置
+    endpoints:
+      analysis:
+        path: /analysis
+        max-connections: 5
+        message-size-limit: 32768
+        progress-update-interval: 1000
+      
+      workflow:
+        path: /workflow
+        max-connections: 5
+        message-size-limit: 32768
+        progress-update-interval: 1000
+  
+  # 缓存配置
+  cache:
+    type: simple
+    ttl: 300
+    max-size: 100
+    
+    # 缓存配置
+    caches:
+      agents:
+        ttl: 600
+        max-size: 50
+      workflows:
+        ttl: 300
+        max-size: 100
+      mcp-tools:
+        ttl: 1800
+        max-size: 20
+  
+  # 安全配置
+  security:
+    jwt:
+      secret: test-jwt-secret-key-for-testing-purposes-only-not-for-production
+      expiration: 3600000  # 1小时
+      refresh-expiration: 86400000  # 24小时
+    
+    cors:
+      allowed-origins:
+        - http://localhost:3000
+        - http://localhost:8080
+      allowed-methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - OPTIONS
+      allowed-headers: "*"
+      allow-credentials: true
+      max-age: 3600
+  
+  # 监控配置
+  monitoring:
+    metrics:
+      enabled: true
+      export:
+        prometheus:
+          enabled: false  # 测试环境禁用
+    
+    health-check:
+      enabled: true
+      external-apis:
+        enabled: false  # 测试环境禁用外部API检查
+
+# 测试专用配置
+test:
+  # 模拟服务配置
+  mock:
+    openai:
+      enabled: true
+      port: 8081
+    
+    stock-api:
+      enabled: true
+      port: 8082
+    
+    news-api:
+      enabled: true
+      port: 8083
+  
+  # 测试数据配置
+  data:
+    users:
+      admin:
+        username: admin
+        password: admin123
+        roles: [ADMIN, USER]
+      
+      testuser:
+        username: testuser
+        password: test123
+        roles: [USER]
+    
+    workflows:
+      create-samples: true
+      sample-count: 5
+    
+    agents:
+      create-samples: true
+      sample-count: 3
+  
+  # 测试执行配置
+  execution:
+    timeout: 30000  # 测试超时时间
+    parallel: true  # 并行执行测试
+    cleanup: true   # 测试后清理数据
+  
+  # 集成测试配置
+  integration:
+    testcontainers:
+      mysql:
+        enabled: true
+        image: mysql:8.0
+        database: testdb
+        username: test
+        password: test
+      
+      redis:
+        enabled: true
+        image: redis:7.2-alpine
+    
+    wiremock:
+      enabled: true
+      port: 8089
+      record-mappings: false
+  
+  # 性能测试配置
+  performance:
+    enabled: false
+    concurrent-users: 10
+    test-duration: 60  # 秒
+    ramp-up-time: 10   # 秒

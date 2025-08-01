@@ -1,0 +1,405 @@
+/* 股票图表组件样式 */
+
+.stock-chart {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.stock-chart.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background: white;
+  margin: 0;
+  border-radius: 0;
+}
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.chart-header .real-time-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.chart-header .price {
+  font-size: 18px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.chart-header .change {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.chart-header .change.positive {
+  color: #52c41a;
+  background-color: #f6ffed;
+}
+
+.chart-header .change.negative {
+  color: #ff4d4f;
+  background-color: #fff2f0;
+}
+
+.chart-container {
+  width: 100%;
+  min-height: 300px;
+}
+
+/* 工具栏样式 */
+.stock-chart .ant-card-extra {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.stock-chart .ant-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.stock-chart .ant-radio-button-wrapper {
+  height: 24px;
+  line-height: 22px;
+  padding: 0 8px;
+  font-size: 12px;
+}
+
+.stock-chart .ant-select {
+  font-size: 12px;
+}
+
+.stock-chart .ant-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .chart-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .chart-header .real-time-info {
+    margin-left: 0;
+  }
+  
+  .stock-chart .ant-card-extra {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .chart-header .price {
+    font-size: 16px;
+  }
+  
+  .chart-header .change {
+    font-size: 12px;
+  }
+  
+  .stock-chart .ant-radio-group {
+    flex-wrap: wrap;
+  }
+  
+  .stock-chart .ant-radio-button-wrapper {
+    height: 20px;
+    line-height: 18px;
+    padding: 0 6px;
+    font-size: 11px;
+  }
+  
+  .chart-container {
+    min-height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-header {
+    font-size: 14px;
+  }
+  
+  .chart-header .real-time-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .chart-header .price {
+    font-size: 14px;
+  }
+  
+  .chart-header .change {
+    font-size: 11px;
+  }
+  
+  .stock-chart .ant-card-extra {
+    width: 100%;
+  }
+  
+  .stock-chart .ant-radio-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .stock-chart .ant-radio-button-wrapper {
+    flex: 1;
+    text-align: center;
+    min-width: 0;
+  }
+  
+  .chart-container {
+    min-height: 200px;
+  }
+}
+
+/* 暗色主题支持 */
+[data-theme='dark'] .stock-chart.fullscreen {
+  background: #141414;
+}
+
+[data-theme='dark'] .chart-header .price {
+  color: #d9d9d9;
+}
+
+[data-theme='dark'] .chart-header .change.positive {
+  color: #52c41a;
+  background-color: #162312;
+}
+
+[data-theme='dark'] .chart-header .change.negative {
+  color: #ff4d4f;
+  background-color: #2a1215;
+}
+
+/* 加载状态样式 */
+.stock-chart .ant-spin-container {
+  position: relative;
+}
+
+.stock-chart .ant-spin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+/* 图表容器动画 */
+.chart-container {
+  transition: height 0.3s ease;
+}
+
+/* 全屏模式动画 */
+.stock-chart.fullscreen {
+  animation: zoomIn 0.3s ease-out;
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 工具提示样式优化 */
+.stock-chart .ant-tooltip {
+  z-index: 1001;
+}
+
+/* 选择器样式优化 */
+.stock-chart .ant-select-dropdown {
+  z-index: 1001;
+}
+
+/* 图表工具栏按钮组 */
+.chart-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chart-toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 4px;
+  background-color: #fafafa;
+}
+
+[data-theme='dark'] .chart-toolbar-group {
+  background-color: #262626;
+}
+
+/* 图表标题样式 */
+.stock-chart .ant-card-head-title {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* 实时价格信息动画 */
+.real-time-info {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 价格变化动画 */
+.chart-header .change {
+  transition: all 0.3s ease;
+}
+
+.chart-header .change.flash-positive {
+  animation: flashGreen 0.6s ease;
+}
+
+.chart-header .change.flash-negative {
+  animation: flashRed 0.6s ease;
+}
+
+@keyframes flashGreen {
+  0%, 100% {
+    background-color: #f6ffed;
+  }
+  50% {
+    background-color: #d9f7be;
+  }
+}
+
+@keyframes flashRed {
+  0%, 100% {
+    background-color: #fff2f0;
+  }
+  50% {
+    background-color: #ffccc7;
+  }
+}
+
+/* 图表加载骨架屏 */
+.chart-skeleton {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+[data-theme='dark'] .chart-skeleton {
+  background: linear-gradient(90deg, #262626 25%, #303030 50%, #262626 75%);
+  background-size: 200% 100%;
+}
+
+/* 图表错误状态 */
+.chart-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #8c8c8c;
+  font-size: 14px;
+}
+
+.chart-error .anticon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  color: #d9d9d9;
+}
+
+[data-theme='dark'] .chart-error {
+  color: #595959;
+}
+
+[data-theme='dark'] .chart-error .anticon {
+  color: #434343;
+}
+
+/* 图表无数据状态 */
+.chart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #8c8c8c;
+}
+
+.chart-empty .ant-empty {
+  margin: 0;
+}
+
+/* 自定义滚动条 */
+.stock-chart ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.stock-chart ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.stock-chart ::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.stock-chart ::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+[data-theme='dark'] .stock-chart ::-webkit-scrollbar-track {
+  background: #262626;
+}
+
+[data-theme='dark'] .stock-chart ::-webkit-scrollbar-thumb {
+  background: #434343;
+}
+
+[data-theme='dark'] .stock-chart ::-webkit-scrollbar-thumb:hover {
+  background: #595959;
+}

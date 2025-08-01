@@ -1,0 +1,1075 @@
+/**
+ * 智能体协作组件样式
+ * @author Stock-Agent Team
+ * @version 1.0
+ */
+
+/* 协作页面基础样式 */
+.collaboration-page {
+  padding: 24px;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.collaboration-header {
+  background: #fff;
+  padding: 16px 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+}
+
+.collaboration-stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.collaboration-stat-card {
+  flex: 1;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.collaboration-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.collaboration-stat-value {
+  font-size: 32px;
+  font-weight: bold;
+  color: #1890ff;
+  margin-bottom: 8px;
+}
+
+.collaboration-stat-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.collaboration-stat-change {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.collaboration-stat-change.positive {
+  color: #52c41a;
+}
+
+.collaboration-stat-change.negative {
+  color: #ff4d4f;
+}
+
+.collaboration-main-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* 智能体管理样式 */
+.agent-management {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.agent-management-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.agent-management-content {
+  padding: 24px;
+}
+
+.agent-search-filter {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.agent-search-filter .ant-input {
+  flex: 1;
+}
+
+.agent-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.agent-item {
+  padding: 16px;
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.agent-item:hover {
+  border-color: #1890ff;
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.1);
+}
+
+.agent-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.agent-item-name {
+  font-weight: 600;
+  color: #262626;
+}
+
+.agent-item-type {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: #f0f0f0;
+  color: #666;
+}
+
+.agent-item-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.agent-status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.agent-status-indicator.online {
+  background: #52c41a;
+  box-shadow: 0 0 0 2px rgba(82, 196, 26, 0.2);
+}
+
+.agent-status-indicator.offline {
+  background: #d9d9d9;
+}
+
+.agent-status-indicator.busy {
+  background: #faad14;
+  box-shadow: 0 0 0 2px rgba(250, 173, 20, 0.2);
+}
+
+.agent-status-indicator.error {
+  background: #ff4d4f;
+  box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2);
+}
+
+.agent-item-info {
+  font-size: 12px;
+  color: #666;
+  display: flex;
+  gap: 16px;
+}
+
+.agent-item-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+/* 会话管理样式 */
+.session-management {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.session-management-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.session-management-content {
+  padding: 24px;
+}
+
+.session-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.session-item {
+  padding: 16px;
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.session-item:hover {
+  border-color: #1890ff;
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.1);
+}
+
+.session-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.session-item-title {
+  font-weight: 600;
+  color: #262626;
+}
+
+.session-item-mode {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  color: #fff;
+}
+
+.session-mode-structured-debate {
+  background: #722ed1;
+}
+
+.session-mode-parallel-analysis {
+  background: #1890ff;
+}
+
+.session-mode-sequential-pipeline {
+  background: #52c41a;
+}
+
+.session-mode-consensus-building {
+  background: #fa8c16;
+}
+
+.session-item-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.session-status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.session-status-indicator.pending {
+  background: #d9d9d9;
+}
+
+.session-status-indicator.running {
+  background: #1890ff;
+  animation: pulse 2s infinite;
+}
+
+.session-status-indicator.completed {
+  background: #52c41a;
+}
+
+.session-status-indicator.failed {
+  background: #ff4d4f;
+}
+
+.session-status-indicator.cancelled {
+  background: #faad14;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(24, 144, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(24, 144, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(24, 144, 255, 0);
+  }
+}
+
+.session-item-info {
+  font-size: 12px;
+  color: #666;
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.session-item-progress {
+  margin-bottom: 8px;
+}
+
+.session-item-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* 协作概览样式 */
+.collaboration-dashboard {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+}
+
+.dashboard-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.dashboard-metric-card {
+  padding: 20px;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.dashboard-metric-card:hover {
+  border-color: #1890ff;
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.1);
+}
+
+.dashboard-metric-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.dashboard-metric-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #262626;
+  margin-bottom: 4px;
+}
+
+.dashboard-metric-label {
+  font-size: 14px;
+  color: #666;
+}
+
+.dashboard-charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.dashboard-chart-card {
+  padding: 20px;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+}
+
+.dashboard-chart-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #262626;
+  margin-bottom: 16px;
+}
+
+.dashboard-activities {
+  margin-top: 24px;
+}
+
+.dashboard-activity-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dashboard-activity-item:last-child {
+  border-bottom: none;
+}
+
+.dashboard-activity-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #fff;
+}
+
+.dashboard-activity-icon.success {
+  background: #52c41a;
+}
+
+.dashboard-activity-icon.warning {
+  background: #faad14;
+}
+
+.dashboard-activity-icon.error {
+  background: #ff4d4f;
+}
+
+.dashboard-activity-icon.info {
+  background: #1890ff;
+}
+
+.dashboard-activity-content {
+  flex: 1;
+}
+
+.dashboard-activity-title {
+  font-weight: 600;
+  color: #262626;
+  margin-bottom: 2px;
+}
+
+.dashboard-activity-description {
+  font-size: 12px;
+  color: #666;
+}
+
+.dashboard-activity-time {
+  font-size: 12px;
+  color: #999;
+}
+
+/* 协作历史样式 */
+.collaboration-history {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.collaboration-history-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.collaboration-history-content {
+  padding: 24px;
+}
+
+.history-filters {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.history-table {
+  margin-bottom: 16px;
+}
+
+.history-table .ant-table-tbody > tr:hover > td {
+  background: #f5f5f5;
+}
+
+.history-detail-drawer .ant-drawer-body {
+  padding: 0;
+}
+
+.history-detail-content {
+  padding: 24px;
+}
+
+.history-detail-section {
+  margin-bottom: 24px;
+}
+
+.history-detail-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #262626;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.history-participants {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.history-participant-tag {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  border: 1px solid #d9d9d9;
+  background: #fafafa;
+}
+
+.history-interactions {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.history-interaction-item {
+  padding: 12px;
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.history-interaction-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.history-interaction-agent {
+  font-weight: 600;
+  color: #1890ff;
+}
+
+.history-interaction-time {
+  font-size: 12px;
+  color: #999;
+}
+
+.history-interaction-content {
+  font-size: 14px;
+  color: #262626;
+  line-height: 1.5;
+}
+
+/* 快速协作样式 */
+.quick-collaboration {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+}
+
+.quick-collaboration-header {
+  margin-bottom: 24px;
+}
+
+.quick-collaboration-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #262626;
+  margin-bottom: 8px;
+}
+
+.quick-collaboration-description {
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.quick-mode-selection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.quick-mode-card {
+  padding: 16px;
+  border: 2px solid #f0f0f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.quick-mode-card:hover {
+  border-color: #1890ff;
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.1);
+}
+
+.quick-mode-card.selected {
+  border-color: #1890ff;
+  background: #f6ffed;
+}
+
+.quick-mode-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+  color: #1890ff;
+}
+
+.quick-mode-title {
+  font-weight: 600;
+  color: #262626;
+  margin-bottom: 4px;
+}
+
+.quick-mode-description {
+  font-size: 12px;
+  color: #666;
+}
+
+.quick-collaboration-form {
+  margin-bottom: 24px;
+}
+
+.quick-collaboration-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* 实时监控样式 */
+.realtime-monitor {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+}
+
+.realtime-monitor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.realtime-monitor-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.realtime-connection-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.realtime-connection-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #52c41a;
+  animation: pulse 2s infinite;
+}
+
+.realtime-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.realtime-metric-card {
+  padding: 16px;
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.realtime-metric-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1890ff;
+  margin-bottom: 4px;
+}
+
+.realtime-metric-label {
+  font-size: 12px;
+  color: #666;
+}
+
+.realtime-charts {
+  margin-bottom: 24px;
+}
+
+.realtime-chart-container {
+  height: 200px;
+  margin-bottom: 16px;
+}
+
+.realtime-events {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.realtime-event-item {
+  padding: 8px 12px;
+  border-left: 3px solid #1890ff;
+  background: #f6ffed;
+  margin-bottom: 8px;
+  border-radius: 0 4px 4px 0;
+}
+
+.realtime-event-time {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+.realtime-event-content {
+  font-size: 14px;
+  color: #262626;
+}
+
+/* 协作设置样式 */
+.collaboration-settings {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.collaboration-settings .ant-tabs-content-holder {
+  padding: 24px;
+}
+
+.collaboration-settings .ant-card {
+  margin-bottom: 16px;
+}
+
+.collaboration-settings .ant-card-head {
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.collaboration-settings .ant-form-item {
+  margin-bottom: 16px;
+}
+
+.collaboration-settings .ant-slider {
+  margin: 8px 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .collaboration-main-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-charts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .collaboration-page {
+    padding: 16px;
+  }
+  
+  .collaboration-stats {
+    flex-direction: column;
+  }
+  
+  .agent-search-filter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .history-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .quick-mode-selection {
+    grid-template-columns: 1fr;
+  }
+  
+  .realtime-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .collaboration-header {
+    padding: 12px 16px;
+  }
+  
+  .collaboration-stat-card {
+    padding: 16px;
+  }
+  
+  .collaboration-stat-value {
+    font-size: 24px;
+  }
+  
+  .realtime-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 加载状态 */
+.collaboration-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  color: #666;
+}
+
+.collaboration-loading .anticon {
+  margin-right: 8px;
+}
+
+/* 空状态 */
+.collaboration-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+}
+
+.collaboration-empty .anticon {
+  font-size: 48px;
+  color: #d9d9d9;
+  margin-bottom: 16px;
+}
+
+.collaboration-empty-title {
+  font-size: 16px;
+  color: #262626;
+  margin-bottom: 8px;
+}
+
+.collaboration-empty-description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+/* 工具提示 */
+.collaboration-tooltip {
+  max-width: 300px;
+}
+
+/* 标签样式 */
+.collaboration-tag {
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+/* 分割线 */
+.collaboration-divider {
+  margin: 24px 0;
+}
+
+/* 操作按钮组 */
+.collaboration-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+/* 表格样式 */
+.collaboration-table .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 600;
+}
+
+.collaboration-table .ant-table-tbody > tr:hover > td {
+  background: #f5f5f5;
+}
+
+/* 模态框样式 */
+.collaboration-modal .ant-modal-header {
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.collaboration-modal .ant-modal-body {
+  padding: 24px;
+}
+
+/* 抽屉样式 */
+.collaboration-drawer .ant-drawer-header {
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.collaboration-drawer .ant-drawer-body {
+  padding: 24px;
+}
+
+/* 卡片悬停效果 */
+.collaboration-card-hover {
+  transition: all 0.3s ease;
+}
+
+.collaboration-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* 进度条样式 */
+.collaboration-progress {
+  margin: 8px 0;
+}
+
+.collaboration-progress .ant-progress-text {
+  font-size: 12px;
+}
+
+/* 实时数据样式 */
+.collaboration-realtime {
+  position: relative;
+}
+
+.collaboration-realtime::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  background: #52c41a;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.collaboration-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.collaboration-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* 状态指示器 */
+.collaboration-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.collaboration-status.success {
+  background: #f6ffed;
+  color: #52c41a;
+  border: 1px solid #b7eb8f;
+}
+
+.collaboration-status.warning {
+  background: #fffbe6;
+  color: #faad14;
+  border: 1px solid #ffe58f;
+}
+
+.collaboration-status.error {
+  background: #fff2f0;
+  color: #ff4d4f;
+  border: 1px solid #ffccc7;
+}
+
+.collaboration-status.info {
+  background: #f6ffed;
+  color: #1890ff;
+  border: 1px solid #91d5ff;
+}
+
+.collaboration-status.processing {
+  background: #f0f5ff;
+  color: #1890ff;
+  border: 1px solid #adc6ff;
+}
+
+/* 协作模式图标 */
+.collaboration-mode-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 12px;
+}
+
+.collaboration-mode-icon.structured-debate {
+  background: #722ed1;
+}
+
+.collaboration-mode-icon.parallel-analysis {
+  background: #1890ff;
+}
+
+.collaboration-mode-icon.sequential-pipeline {
+  background: #52c41a;
+}
+
+.collaboration-mode-icon.consensus-building {
+  background: #fa8c16;
+}
+
+/* 智能体类型图标 */
+.agent-type-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 10px;
+}
+
+.agent-type-icon.market-analyst {
+  background: #1890ff;
+}
+
+.agent-type-icon.risk-assessor {
+  background: #ff4d4f;
+}
+
+.agent-type-icon.strategy-advisor {
+  background: #52c41a;
+}
+
+.agent-type-icon.data-processor {
+  background: #722ed1;
+}
+
+.agent-type-icon.decision-maker {
+  background: #fa8c16;
+}
+
+.agent-type-icon.coordinator {
+  background: #13c2c2;
+}

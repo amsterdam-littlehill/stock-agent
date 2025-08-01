@@ -1,5 +1,43 @@
-# Agent开源git开源文档
-简体中文 | [English Version](README_EN.md)
+# 股票智能分析系统 (Stock Agent System)
+
+一个基于Spring Boot + React的智能股票分析系统，集成多种分析智能体，提供技术分析、基本面分析、情绪分析等功能。
+
+## 系统架构
+
+### 后端技术栈
+- **框架**: Spring Boot 3.2.0
+- **数据库**: MySQL 8.0 + Redis 7.0
+- **ORM**: Spring Data JPA + Hibernate
+- **缓存**: Redis + Spring Cache
+- **消息**: WebSocket + STOMP
+- **文档**: Swagger/OpenAPI 3
+- **构建**: Maven 3.8+
+
+### 前端技术栈
+- **框架**: React 19 + TypeScript
+- **UI库**: Ant Design 5.x
+- **图表**: ECharts + Ant Design Charts
+- **状态管理**: Zustand
+- **HTTP客户端**: Axios
+- **实时通信**: WebSocket + STOMP
+- **构建工具**: Vite 6.x
+
+## 功能特性
+
+### 核心功能
+- 🔍 **股票搜索**: 支持股票代码、名称搜索，搜索历史记录
+- 📊 **实时行情**: K线图、成交量、技术指标展示
+- 🤖 **智能分析**: 多种分析智能体（技术、基本面、情绪、风险分析）
+- 📈 **分析结果**: 投资建议、风险评估、置信度评分
+- 📱 **实时推送**: WebSocket实时数据更新
+- 📋 **任务管理**: 分析任务创建、监控、历史记录
+
+### 智能体类型
+- **技术分析智能体**: MA、MACD、RSI、BOLL等技术指标分析
+- **基本面分析智能体**: 财务数据、估值分析
+- **情绪分析智能体**: 市场情绪、新闻情感分析
+- **风险分析智能体**: 风险评估、波动率分析
+- **综合分析智能体**: 多维度综合评估
 
 ## 业界首个开源高完成度轻量化通用多智能体产品(JoyAgent-JDGenie)
 **解决快速构建多智能体产品的最后一公里问题**

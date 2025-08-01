@@ -1,0 +1,301 @@
+.portfolio-page {
+  padding: 24px;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.portfolio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.portfolio-header h2 {
+  margin: 0;
+  color: #1890ff;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.portfolio-header p {
+  margin: 4px 0 0 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.header-left {
+  flex: 1;
+}
+
+.header-right {
+  flex-shrink: 0;
+}
+
+/* 投资组合卡片样式 */
+.portfolio-page .ant-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.portfolio-page .ant-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* 统计数据样式 */
+.portfolio-page .ant-statistic {
+  text-align: center;
+}
+
+.portfolio-page .ant-statistic-title {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.portfolio-page .ant-statistic-content {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* 表格样式优化 */
+.portfolio-page .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 600;
+  color: #333;
+}
+
+.portfolio-page .ant-table-tbody > tr:hover > td {
+  background: #f5f5f5;
+}
+
+.portfolio-page .ant-table-tbody > tr.ant-table-row-selected > td {
+  background: #e6f7ff;
+}
+
+/* 标签样式 */
+.portfolio-page .ant-tag {
+  border-radius: 4px;
+  font-size: 12px;
+  padding: 2px 8px;
+}
+
+/* 按钮样式 */
+.portfolio-page .ant-btn {
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.portfolio-page .ant-btn-primary {
+  background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+  border: none;
+}
+
+.portfolio-page .ant-btn-primary:hover {
+  background: linear-gradient(135deg, #40a9ff 0%, #1890ff 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+}
+
+/* 空状态样式 */
+.portfolio-page .ant-empty {
+  padding: 60px 0;
+}
+
+.portfolio-page .ant-empty-description {
+  color: #999;
+  font-size: 14px;
+}
+
+/* 加载状态样式 */
+.portfolio-page .ant-spin {
+  color: #1890ff;
+}
+
+/* 标签页样式 */
+.portfolio-page .ant-tabs-tab {
+  font-weight: 500;
+  padding: 12px 16px;
+}
+
+.portfolio-page .ant-tabs-tab-active {
+  color: #1890ff;
+  font-weight: 600;
+}
+
+.portfolio-page .ant-tabs-ink-bar {
+  background: #1890ff;
+  height: 3px;
+}
+
+/* 指标卡片样式 */
+.portfolio-page .ant-card-small > .ant-card-head {
+  min-height: 40px;
+  padding: 0 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.portfolio-page .ant-card-small > .ant-card-body {
+  padding: 16px 12px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .portfolio-page {
+    padding: 16px;
+  }
+  
+  .portfolio-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .header-right {
+    width: 100%;
+  }
+  
+  .portfolio-page .ant-statistic-content {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .portfolio-page {
+    padding: 12px;
+  }
+  
+  .portfolio-header h2 {
+    font-size: 20px;
+  }
+  
+  .portfolio-page .ant-statistic-content {
+    font-size: 16px;
+  }
+  
+  .portfolio-page .ant-btn {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+}
+
+/* 动画效果 */
+.portfolio-page .ant-card {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 收益颜色样式 */
+.profit-positive {
+  color: #52c41a;
+  font-weight: 600;
+}
+
+.profit-negative {
+  color: #ff4d4f;
+  font-weight: 600;
+}
+
+.profit-neutral {
+  color: #666;
+  font-weight: 500;
+}
+
+/* 进度条样式 */
+.portfolio-page .ant-progress-line {
+  margin: 8px 0;
+}
+
+.portfolio-page .ant-progress-text {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 工具提示样式 */
+.portfolio-page .ant-tooltip {
+  font-size: 12px;
+}
+
+/* 模态框样式 */
+.portfolio-page .ant-modal-header {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 16px 24px;
+}
+
+.portfolio-page .ant-modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.portfolio-page .ant-modal-body {
+  padding: 24px;
+}
+
+.portfolio-page .ant-modal-footer {
+  border-top: 1px solid #f0f0f0;
+  padding: 12px 24px;
+  text-align: right;
+}
+
+/* 表单样式 */
+.portfolio-page .ant-form-item-label > label {
+  font-weight: 500;
+  color: #333;
+}
+
+.portfolio-page .ant-form-item-required::before {
+  color: #ff4d4f;
+}
+
+.portfolio-page .ant-input,
+.portfolio-page .ant-select-selector,
+.portfolio-page .ant-input-number {
+  border-radius: 6px;
+}
+
+.portfolio-page .ant-input:focus,
+.portfolio-page .ant-select-focused .ant-select-selector,
+.portfolio-page .ant-input-number:focus {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+/* 警告提示样式 */
+.portfolio-page .ant-alert {
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.portfolio-page .ant-alert-warning {
+  background: #fffbe6;
+  border: 1px solid #ffe58f;
+}
+
+.portfolio-page .ant-alert-error {
+  background: #fff2f0;
+  border: 1px solid #ffccc7;
+}
+
+.portfolio-page .ant-alert-success {
+  background: #f6ffed;
+  border: 1px solid #b7eb8f;
+}
+
+.portfolio-page .ant-alert-info {
+  background: #e6f7ff;
+  border: 1px solid #91d5ff;
+}

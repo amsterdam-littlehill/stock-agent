@@ -1,0 +1,270 @@
+/* 股票搜索页面样式 */
+
+.stock-search-page {
+  padding: 24px;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.search-card {
+  margin-bottom: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+  margin: 16px 0;
+}
+
+.search-history {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.history-tag {
+  cursor: pointer;
+  margin: 4px;
+  transition: all 0.3s ease;
+}
+
+.history-tag:hover {
+  background-color: #1890ff;
+  color: white;
+  border-color: #1890ff;
+}
+
+.results-card,
+.watchlist-card {
+  margin-bottom: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stock-list {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.stock-item {
+  padding: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.stock-item:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stock-item:last-child {
+  border-bottom: none;
+}
+
+.stock-item-content {
+  width: 100%;
+}
+
+.stock-code {
+  font-size: 16px;
+  color: #1890ff;
+  font-weight: 600;
+}
+
+.stock-name {
+  font-size: 16px;
+  color: #262626;
+  font-weight: 500;
+}
+
+.stock-industry {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.stock-price {
+  font-size: 18px;
+  color: #262626;
+}
+
+.text-red {
+  color: #ff4d4f !important;
+}
+
+.text-green {
+  color: #52c41a !important;
+}
+
+.text-gray {
+  color: #8c8c8c !important;
+}
+
+.trend-up {
+  color: #ff4d4f;
+}
+
+.trend-down {
+  color: #52c41a;
+}
+
+.watch-btn {
+  color: #8c8c8c;
+  transition: all 0.3s ease;
+}
+
+.watch-btn:hover {
+  color: #faad14;
+}
+
+.watch-btn-active {
+  color: #faad14;
+}
+
+.watch-btn-active:hover {
+  color: #d48806;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .stock-search-page {
+    padding: 16px;
+  }
+  
+  .stock-item {
+    padding: 12px;
+  }
+  
+  .stock-code,
+  .stock-name {
+    font-size: 14px;
+  }
+  
+  .stock-price {
+    font-size: 16px;
+  }
+  
+  .search-history {
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stock-search-page {
+    padding: 12px;
+  }
+  
+  .stock-item-content .ant-row {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  
+  .stock-item-content .ant-col:last-child {
+    margin-top: 8px;
+    align-self: flex-end;
+  }
+}
+
+/* 暗色主题支持 */
+[data-theme='dark'] .stock-search-page {
+  background-color: #141414;
+}
+
+[data-theme='dark'] .search-card,
+[data-theme='dark'] .results-card,
+[data-theme='dark'] .watchlist-card {
+  background-color: #1f1f1f;
+  border-color: #303030;
+}
+
+[data-theme='dark'] .stock-item {
+  border-bottom-color: #303030;
+}
+
+[data-theme='dark'] .stock-item:hover {
+  background-color: #262626;
+}
+
+[data-theme='dark'] .stock-code {
+  color: #1890ff;
+}
+
+[data-theme='dark'] .stock-name {
+  color: #d9d9d9;
+}
+
+[data-theme='dark'] .stock-industry {
+  color: #8c8c8c;
+}
+
+[data-theme='dark'] .stock-price {
+  color: #d9d9d9;
+}
+
+[data-theme='dark'] .search-history {
+  border-top-color: #303030;
+}
+
+/* 加载状态样式 */
+.stock-list .ant-spin-container {
+  min-height: 200px;
+}
+
+/* 空状态样式 */
+.stock-list .ant-empty {
+  margin: 40px 0;
+}
+
+/* 标签样式优化 */
+.ant-tag {
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+/* 搜索框样式优化 */
+.search-input .ant-input-search {
+  border-radius: 6px;
+}
+
+.search-input .ant-btn {
+  border-radius: 0 6px 6px 0;
+}
+
+/* 卡片标题样式 */
+.ant-card-head-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* 滚动条样式 */
+.stock-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.stock-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.stock-list::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.stock-list::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+[data-theme='dark'] .stock-list::-webkit-scrollbar-track {
+  background: #262626;
+}
+
+[data-theme='dark'] .stock-list::-webkit-scrollbar-thumb {
+  background: #434343;
+}
+
+[data-theme='dark'] .stock-list::-webkit-scrollbar-thumb:hover {
+  background: #595959;
+}

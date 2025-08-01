@@ -1,0 +1,272 @@
+/* 股票搜索组件样式 */
+
+.stock-search {
+  position: relative;
+}
+
+.stock-search-dropdown {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.stock-search-option {
+  padding: 8px 0;
+}
+
+.stock-search-option .stock-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.stock-search-option .stock-code {
+  font-weight: 600;
+  color: #1890ff;
+  font-size: 14px;
+}
+
+.stock-search-option .stock-name {
+  color: #262626;
+  font-size: 14px;
+}
+
+.stock-search-option .stock-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.stock-search-option .industry {
+  background: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.stock-search-option .market-cap {
+  color: #52c41a;
+}
+
+.stock-search-option-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.stock-search-option-wrapper:hover {
+  background-color: #f5f5f5;
+}
+
+.option-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.search-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px;
+  color: #8c8c8c;
+}
+
+.search-suggestions {
+  padding: 12px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: #8c8c8c;
+  font-weight: 500;
+}
+
+.section-header .anticon {
+  font-size: 12px;
+}
+
+.section-header .ant-btn {
+  margin-left: auto;
+  color: #8c8c8c;
+}
+
+.history-section {
+  margin-bottom: 16px;
+}
+
+.history-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.history-tag {
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid #d9d9d9;
+  background: #fafafa;
+}
+
+.history-tag:hover {
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+.watchlist-section {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 12px;
+}
+
+.watchlist-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 6px;
+}
+
+.watchlist-item {
+  padding: 6px 8px;
+  background: #f0f7ff;
+  border: 1px solid #d6e4ff;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 12px;
+  color: #1890ff;
+  transition: all 0.2s;
+}
+
+.watchlist-item:hover {
+  background: #e6f7ff;
+  border-color: #91d5ff;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .stock-search-option .stock-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .stock-search-option .stock-meta {
+    gap: 8px;
+  }
+  
+  .watchlist-items {
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  }
+  
+  .history-tags {
+    gap: 4px;
+  }
+}
+
+/* 暗色主题支持 */
+[data-theme='dark'] .stock-search-option .stock-name {
+  color: #d9d9d9;
+}
+
+[data-theme='dark'] .stock-search-option .industry {
+  background: #262626;
+  color: #d9d9d9;
+}
+
+[data-theme='dark'] .stock-search-option-wrapper:hover {
+  background-color: #262626;
+}
+
+[data-theme='dark'] .history-tag {
+  border-color: #434343;
+  background: #262626;
+  color: #d9d9d9;
+}
+
+[data-theme='dark'] .history-tag:hover {
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+[data-theme='dark'] .watchlist-item {
+  background: #111b26;
+  border-color: #1e3a5f;
+}
+
+[data-theme='dark'] .watchlist-item:hover {
+  background: #0f1419;
+  border-color: #1890ff;
+}
+
+[data-theme='dark'] .watchlist-section {
+  border-top-color: #303030;
+}
+
+/* 动画效果 */
+.stock-search-dropdown {
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.history-tag,
+.watchlist-item {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 滚动条样式 */
+.stock-search-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.stock-search-dropdown::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.stock-search-dropdown::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.stock-search-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+[data-theme='dark'] .stock-search-dropdown::-webkit-scrollbar-track {
+  background: #262626;
+}
+
+[data-theme='dark'] .stock-search-dropdown::-webkit-scrollbar-thumb {
+  background: #434343;
+}
+
+[data-theme='dark'] .stock-search-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #595959;
+}

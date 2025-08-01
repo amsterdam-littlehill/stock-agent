@@ -1,0 +1,280 @@
+.workflow-designer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+
+/* 顶部工具栏 */
+.designer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background: white;
+  border-bottom: 1px solid #e8e8e8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.designer-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.designer-subtitle {
+  font-size: 12px;
+  color: #8c8c8c;
+  margin-top: 2px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.zoom-level {
+  font-size: 12px;
+  color: #666;
+  min-width: 40px;
+  text-align: center;
+}
+
+/* 主要内容区域 */
+.designer-content {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 左侧节点面板 */
+.designer-sidebar.left {
+  width: 280px;
+  background: white;
+  border-right: 1px solid #e8e8e8;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+/* 中间画布区域 */
+.designer-main {
+  flex: 1;
+  position: relative;
+  background: #fafafa;
+  overflow: hidden;
+}
+
+/* 右侧属性面板 */
+.designer-sidebar.right {
+  width: 320px;
+  background: white;
+  border-left: 1px solid #e8e8e8;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+/* 工具栏按钮样式 */
+.designer-header .ant-btn {
+  border-radius: 6px;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+.designer-header .ant-btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+}
+
+.designer-header .ant-btn-primary:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.designer-header .ant-btn:disabled {
+  opacity: 0.5;
+}
+
+/* 保存对话框样式 */
+.form-actions {
+  margin-bottom: 0;
+  text-align: right;
+}
+
+.form-actions .ant-form-item-control-input {
+  text-align: right;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .designer-sidebar.left {
+    width: 240px;
+  }
+  
+  .designer-sidebar.right {
+    width: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .designer-header {
+    padding: 8px 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .header-left {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .header-right .ant-space {
+    flex-wrap: wrap;
+  }
+  
+  .designer-sidebar.left {
+    width: 200px;
+  }
+  
+  .designer-sidebar.right {
+    width: 240px;
+  }
+  
+  .designer-title {
+    font-size: 16px;
+  }
+  
+  .designer-subtitle {
+    font-size: 11px;
+  }
+}
+
+/* 加载状态 */
+.designer-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+/* 画布网格背景 */
+.workflow-canvas {
+  background-image: 
+    radial-gradient(circle, #d1d5db 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 0 0;
+}
+
+/* 节点选择高亮 */
+.workflow-node.selected {
+  box-shadow: 0 0 0 2px #1890ff;
+  z-index: 10;
+}
+
+.workflow-edge.selected {
+  stroke: #1890ff;
+  stroke-width: 3;
+}
+
+/* 拖拽状态 */
+.workflow-node.dragging {
+  opacity: 0.8;
+  transform: scale(1.05);
+  z-index: 100;
+}
+
+/* 连接点样式 */
+.node-connector {
+  width: 8px;
+  height: 8px;
+  background: #1890ff;
+  border: 2px solid white;
+  border-radius: 50%;
+  position: absolute;
+  cursor: crosshair;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.workflow-node:hover .node-connector {
+  opacity: 1;
+}
+
+.node-connector.input {
+  left: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.node-connector.output {
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 连接线动画 */
+.workflow-edge {
+  transition: stroke 0.2s, stroke-width 0.2s;
+}
+
+.workflow-edge:hover {
+  stroke: #40a9ff;
+  stroke-width: 2;
+}
+
+/* 工具提示样式 */
+.ant-tooltip {
+  z-index: 1050;
+}
+
+/* 抽屉样式覆盖 */
+.ant-drawer-content-wrapper {
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+}
+
+.ant-drawer-header {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 16px 24px;
+}
+
+.ant-drawer-body {
+  padding: 24px;
+}
+
+/* 快捷键提示 */
+.shortcut-hint {
+  font-size: 11px;
+  color: #8c8c8c;
+  margin-left: 4px;
+}
+
+/* 验证错误提示 */
+.validation-error {
+  color: #ff4d4f;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* 节点计数器 */
+.node-counter {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 11px;
+  z-index: 20;
+}

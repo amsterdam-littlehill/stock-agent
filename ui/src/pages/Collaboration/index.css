@@ -1,0 +1,435 @@
+/**
+ * 智能体协作页面样式
+ * @author Stock-Agent Team
+ * @version 1.0
+ */
+
+.collaboration-page {
+  padding: 24px;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* 页面头部样式 */
+.collaboration-header {
+  margin-bottom: 24px;
+  padding: 16px 24px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.collaboration-header .page-icon {
+  font-size: 32px;
+  color: #1890ff;
+  margin-right: 12px;
+}
+
+/* 统计卡片样式 */
+.collaboration-stats {
+  margin-bottom: 24px;
+}
+
+.collaboration-stats .ant-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.collaboration-stats .ant-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.collaboration-stats .ant-statistic {
+  text-align: center;
+}
+
+.collaboration-stats .ant-statistic-title {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.collaboration-stats .ant-statistic-content {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* 主要内容区域 */
+.collaboration-content {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.collaboration-content .ant-tabs-nav {
+  margin-bottom: 0;
+  padding: 0 24px;
+  background: #fafafa;
+  border-radius: 8px 8px 0 0;
+}
+
+.collaboration-content .ant-tabs-tab {
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.collaboration-content .ant-tabs-tab-active {
+  background: #fff;
+  border-radius: 8px 8px 0 0;
+}
+
+.collaboration-content .ant-tabs-content-holder {
+  padding: 24px;
+}
+
+/* 导出选项样式 */
+.export-options {
+  padding: 16px;
+}
+
+.export-options .ant-btn {
+  height: 48px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .collaboration-page {
+    padding: 16px;
+  }
+  
+  .collaboration-header {
+    padding: 12px 16px;
+  }
+  
+  .collaboration-header .ant-typography {
+    font-size: 20px;
+  }
+  
+  .collaboration-stats .ant-statistic-content {
+    font-size: 20px;
+  }
+  
+  .collaboration-content .ant-tabs-tab {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  
+  .collaboration-content .ant-tabs-content-holder {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .collaboration-page {
+    padding: 12px;
+  }
+  
+  .collaboration-header {
+    padding: 8px 12px;
+  }
+  
+  .collaboration-header .page-icon {
+    font-size: 24px;
+  }
+  
+  .collaboration-header .ant-typography {
+    font-size: 18px;
+  }
+  
+  .collaboration-stats .ant-statistic-content {
+    font-size: 18px;
+  }
+  
+  .collaboration-content .ant-tabs-tab {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  .collaboration-content .ant-tabs-content-holder {
+    padding: 12px;
+  }
+}
+
+/* 加载状态样式 */
+.collaboration-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+/* 空状态样式 */
+.collaboration-empty {
+  text-align: center;
+  padding: 48px 24px;
+  color: #999;
+}
+
+.collaboration-empty .ant-empty-image {
+  margin-bottom: 16px;
+}
+
+/* 状态指示器样式 */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-indicator.online {
+  background: #f6ffed;
+  color: #52c41a;
+  border: 1px solid #b7eb8f;
+}
+
+.status-indicator.offline {
+  background: #fff2f0;
+  color: #ff4d4f;
+  border: 1px solid #ffccc7;
+}
+
+.status-indicator.maintenance {
+  background: #fffbe6;
+  color: #faad14;
+  border: 1px solid #ffe58f;
+}
+
+/* 协作模式图标样式 */
+.collaboration-mode-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #fff;
+  margin-right: 12px;
+}
+
+.collaboration-mode-icon.debate {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.collaboration-mode-icon.analysis {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.collaboration-mode-icon.pipeline {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.collaboration-mode-icon.consensus {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+/* 智能体类型图标样式 */
+.agent-type-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #fff;
+  margin-right: 8px;
+}
+
+.agent-type-icon.analysis {
+  background: #1890ff;
+}
+
+.agent-type-icon.prediction {
+  background: #52c41a;
+}
+
+.agent-type-icon.decision {
+  background: #faad14;
+}
+
+.agent-type-icon.monitoring {
+  background: #722ed1;
+}
+
+/* 进度条样式 */
+.collaboration-progress {
+  margin: 16px 0;
+}
+
+.collaboration-progress .ant-progress-text {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 实时数据样式 */
+.realtime-data {
+  padding: 16px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.realtime-data .data-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.realtime-data .data-item:last-child {
+  border-bottom: none;
+}
+
+.realtime-data .data-label {
+  font-size: 14px;
+  color: #666;
+}
+
+.realtime-data .data-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 动画效果 */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in-animation {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* 工具提示样式 */
+.collaboration-tooltip {
+  max-width: 300px;
+}
+
+.collaboration-tooltip .tooltip-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.collaboration-tooltip .tooltip-content {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 标签样式 */
+.collaboration-tag {
+  margin: 2px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+.collaboration-tag.success {
+  background: #f6ffed;
+  color: #52c41a;
+  border: 1px solid #b7eb8f;
+}
+
+.collaboration-tag.warning {
+  background: #fffbe6;
+  color: #faad14;
+  border: 1px solid #ffe58f;
+}
+
+.collaboration-tag.error {
+  background: #fff2f0;
+  color: #ff4d4f;
+  border: 1px solid #ffccc7;
+}
+
+.collaboration-tag.info {
+  background: #e6f7ff;
+  color: #1890ff;
+  border: 1px solid #91d5ff;
+}
+
+/* 卡片悬停效果 */
+.hover-card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.hover-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* 分割线样式 */
+.collaboration-divider {
+  margin: 24px 0;
+  border-color: #e8e8e8;
+}
+
+/* 操作按钮组样式 */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.action-buttons .ant-btn {
+  border-radius: 6px;
+}
+
+/* 表格样式增强 */
+.collaboration-table .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 600;
+  color: #333;
+}
+
+.collaboration-table .ant-table-tbody > tr:hover > td {
+  background: #f5f5f5;
+}
+
+/* 模态框样式 */
+.collaboration-modal .ant-modal-header {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 16px 24px;
+}
+
+.collaboration-modal .ant-modal-body {
+  padding: 24px;
+}
+
+.collaboration-modal .ant-modal-footer {
+  border-top: 1px solid #e8e8e8;
+  padding: 16px 24px;
+}

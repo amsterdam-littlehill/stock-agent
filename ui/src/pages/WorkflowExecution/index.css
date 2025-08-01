@@ -1,0 +1,363 @@
+.workflow-execution {
+  padding: 24px;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* 执行概览卡片 */
+.execution-overview {
+  margin-bottom: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.overview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.overview-info {
+  flex: 1;
+}
+
+.execution-title {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.execution-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.status-tag {
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 16px;
+}
+
+.execution-id,
+.start-time,
+.end-time {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.overview-actions {
+  flex-shrink: 0;
+}
+
+/* 进度部分 */
+.progress-section {
+  margin-bottom: 24px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #666;
+}
+
+.connection-status {
+  color: #52c41a;
+  font-weight: 500;
+}
+
+/* 执行详情 */
+.execution-details {
+  margin-bottom: 16px;
+}
+
+.execution-details .ant-descriptions-item-label {
+  font-weight: 500;
+  color: #595959;
+}
+
+/* 错误提示 */
+.error-alert {
+  margin-top: 16px;
+}
+
+/* 执行步骤卡片 */
+.execution-steps {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.steps-timeline {
+  margin-top: 16px;
+}
+
+.steps-timeline .ant-steps-item-title {
+  font-weight: 500;
+  color: #262626;
+}
+
+.step-description {
+  margin-top: 8px;
+}
+
+.step-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.step-type {
+  background: #f0f0f0;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  color: #666;
+}
+
+.step-time,
+.step-duration {
+  font-size: 11px;
+  color: #8c8c8c;
+}
+
+.step-output {
+  background: #f6f8fa;
+  border: 1px solid #e1e4e8;
+  border-radius: 4px;
+  padding: 8px;
+  margin: 8px 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.step-output pre {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #24292e;
+}
+
+.step-error {
+  margin-top: 8px;
+}
+
+/* 日志容器 */
+.logs-container {
+  height: calc(100vh - 200px);
+  overflow: hidden;
+}
+
+.logs-container .ant-table {
+  font-size: 12px;
+}
+
+.logs-container .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 600;
+  padding: 8px 12px;
+}
+
+.logs-container .ant-table-tbody > tr > td {
+  padding: 6px 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.logs-container .ant-table-tbody > tr:hover > td {
+  background: #f0f9ff;
+}
+
+/* 加载状态 */
+.execution-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  font-size: 16px;
+  color: #666;
+}
+
+/* 按钮样式 */
+.workflow-execution .ant-btn {
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.workflow-execution .ant-btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+}
+
+.workflow-execution .ant-btn-primary:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.workflow-execution .ant-btn-danger {
+  background: #ff4d4f;
+  border-color: #ff4d4f;
+}
+
+.workflow-execution .ant-btn-danger:hover {
+  background: #ff7875;
+  border-color: #ff7875;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.4);
+}
+
+/* 进度条样式 */
+.ant-progress-line {
+  margin-bottom: 8px;
+}
+
+.ant-progress-bg {
+  border-radius: 10px;
+}
+
+.ant-progress-inner {
+  border-radius: 10px;
+  background: #f0f0f0;
+}
+
+/* 步骤图标动画 */
+.ant-steps-item-process .ant-steps-item-icon {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .overview-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .overview-actions {
+    align-self: stretch;
+  }
+  
+  .execution-meta {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .workflow-execution {
+    padding: 16px;
+  }
+  
+  .execution-title {
+    font-size: 18px;
+  }
+  
+  .execution-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .progress-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .step-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .logs-container {
+    height: calc(100vh - 150px);
+  }
+}
+
+/* 抽屉样式覆盖 */
+.ant-drawer-header {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 16px 24px;
+}
+
+.ant-drawer-body {
+  padding: 0;
+}
+
+.ant-drawer-extra {
+  margin-left: 16px;
+}
+
+/* 标签样式 */
+.ant-tag {
+  border-radius: 12px;
+  font-size: 11px;
+  padding: 2px 8px;
+  margin: 0;
+}
+
+/* 描述列表样式 */
+.ant-descriptions-item {
+  padding-bottom: 8px;
+}
+
+.ant-descriptions-item-label {
+  font-size: 12px;
+}
+
+.ant-descriptions-item-content {
+  font-size: 12px;
+}
+
+/* 时间轴样式 */
+.ant-steps-vertical .ant-steps-item-content {
+  min-height: auto;
+  padding-bottom: 24px;
+}
+
+.ant-steps-vertical .ant-steps-item-tail {
+  padding: 8px 0 24px;
+}
+
+/* 滚动条样式 */
+.logs-container::-webkit-scrollbar,
+.step-output::-webkit-scrollbar {
+  width: 6px;
+}
+
+.logs-container::-webkit-scrollbar-track,
+.step-output::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.logs-container::-webkit-scrollbar-thumb,
+.step-output::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.logs-container::-webkit-scrollbar-thumb:hover,
+.step-output::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

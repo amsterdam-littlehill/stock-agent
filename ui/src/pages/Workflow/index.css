@@ -1,0 +1,122 @@
+.workflow-page {
+  padding: 24px;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.workflow-page .ant-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.workflow-page .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 600;
+}
+
+.workflow-page .ant-table-tbody > tr:hover > td {
+  background: #f0f9ff;
+}
+
+.workflow-page .ant-btn {
+  border-radius: 6px;
+}
+
+.workflow-page .ant-btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+}
+
+.workflow-page .ant-btn-primary:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.workflow-page .ant-tag {
+  border-radius: 12px;
+  font-size: 12px;
+  padding: 2px 8px;
+}
+
+.workflow-page .ant-space-item .ant-btn {
+  transition: all 0.3s ease;
+}
+
+.workflow-page .ant-space-item .ant-btn:hover {
+  transform: scale(1.1);
+}
+
+.workflow-page .ant-table-pagination {
+  margin-top: 24px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .workflow-page {
+    padding: 16px;
+  }
+  
+  .workflow-page .ant-table-thead > tr > th,
+  .workflow-page .ant-table-tbody > tr > td {
+    padding: 8px;
+    font-size: 12px;
+  }
+  
+  .workflow-page .ant-space {
+    flex-wrap: wrap;
+  }
+}
+
+/* 加载状态 */
+.workflow-page .ant-spin-container {
+  min-height: 400px;
+}
+
+/* 空状态 */
+.workflow-page .ant-empty {
+  margin: 40px 0;
+}
+
+/* 工作流状态指示器 */
+.workflow-status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.workflow-status-indicator::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* 工作流统计卡片 */
+.workflow-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.workflow-stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.workflow-stat-card .stat-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1890ff;
+  margin-bottom: 8px;
+}
+
+.workflow-stat-card .stat-label {
+  color: #666;
+  font-size: 14px;
+}

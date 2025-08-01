@@ -1,0 +1,602 @@
+{
+  "info": {
+    "name": "Stock Agent Genie API Collection",
+    "description": "Stock Agent Genie Backend API 测试集合\n\n包含以下模块的API测试：\n- 智能体管理\n- 智能体协调器\n- 工作流管理\n- MCP工具管理\n- 用户管理\n- 系统监控\n\n使用说明：\n1. 导入环境变量配置\n2. 先执行用户登录获取Token\n3. 按模块顺序执行测试",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "stock-agent-genie-api-collection"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// 自动设置时间戳",
+          "pm.globals.set('timestamp', new Date().toISOString());",
+          "",
+          "// 检查Token是否过期",
+          "const token = pm.environment.get('access_token');",
+          "if (token) {",
+          "    try {",
+          "        const payload = JSON.parse(atob(token.split('.')[1]));",
+          "        const exp = payload.exp * 1000;",
+          "        const now = Date.now();",
+          "        if (now >= exp) {",
+          "            console.log('Token已过期，请重新登录');",
+          "            pm.environment.unset('access_token');",
+          "        }",
+          "    } catch (e) {",
+          "        console.log('Token解析失败');",
+          "    }",
+          "}"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080/api",
+      "type": "string"
+    },
+    {
+      "key": "api_version",
+      "value": "v1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "认证管理",
+      "item": [
+        {
+          "name": "用户登录",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('登录成功', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const response = pm.response.json();",
+                  "    pm.expect(response.success).to.be.true;",
+                  "    pm.expect(response.data.accessToken).to.exist;",
+                  "    ",
+                  "    // 保存Token到环境变量",
+                  "    pm.environment.set('access_token', response.data.accessToken);",
+                  "    pm.environment.set('refresh_token', response.data.refreshToken);",
+                  "    pm.environment.set('user_id', response.data.user.id);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "刷新Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refresh_token}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/refresh",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "refresh"]
+            }
+          }
+        },
+        {
+          "name": "用户登出",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/auth/logout",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "智能体管理",
+      "item": [
+        {
+          "name": "获取所有智能体",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('获取智能体列表成功', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const response = pm.response.json();",
+                  "    pm.expect(response.success).to.be.true;",
+                  "    pm.expect(response.data).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/agents",
+              "host": ["{{base_url}}"],
+              "path": ["agents"]
+            }
+          }
+        },
+        {
+          "name": "创建智能体",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('创建智能体成功', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "    const response = pm.response.json();",
+                  "    pm.expect(response.success).to.be.true;",
+                  "    pm.expect(response.data.id).to.exist;",
+                  "    ",
+                  "    // 保存智能体ID",
+                  "    pm.environment.set('agent_id', response.data.id);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"测试智能体\",\n  \"type\": \"STOCK_ANALYST\",\n  \"description\": \"用于API测试的股票分析智能体\",\n  \"capabilities\": [\"STOCK_ANALYSIS\", \"TECHNICAL_ANALYSIS\"],\n  \"config\": {\n    \"model\": \"gpt-4\",\n    \"temperature\": 0.7,\n    \"maxTokens\": 2000\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/agents",
+              "host": ["{{base_url}}"],
+              "path": ["agents"]
+            }
+          }
+        },
+        {
+          "name": "获取智能体详情",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/agents/{{agent_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["agents", "{{agent_id}}"]
+            }
+          }
+        },
+        {
+          "name": "更新智能体",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"更新后的测试智能体\",\n  \"description\": \"更新后的描述\",\n  \"config\": {\n    \"model\": \"gpt-4\",\n    \"temperature\": 0.8,\n    \"maxTokens\": 3000\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/agents/{{agent_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["agents", "{{agent_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "智能体协调器",
+      "item": [
+        {
+          "name": "执行股票分析任务",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('任务执行成功', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const response = pm.response.json();",
+                  "    pm.expect(response.success).to.be.true;",
+                  "    pm.expect(response.data.taskId).to.exist;",
+                  "    ",
+                  "    // 保存任务ID",
+                  "    pm.environment.set('task_id', response.data.taskId);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"STOCK_ANALYSIS\",\n  \"input\": {\n    \"symbol\": \"AAPL\",\n    \"analysisType\": \"COMPREHENSIVE\",\n    \"timeframe\": \"1M\"\n  },\n  \"priority\": \"HIGH\",\n  \"timeout\": 120000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/orchestrator/execute",
+              "host": ["{{base_url}}"],
+              "path": ["orchestrator", "execute"]
+            }
+          }
+        },
+        {
+          "name": "获取任务状态",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/orchestrator/tasks/{{task_id}}/status",
+              "host": ["{{base_url}}"],
+              "path": ["orchestrator", "tasks", "{{task_id}}", "status"]
+            }
+          }
+        },
+        {
+          "name": "获取任务结果",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/orchestrator/tasks/{{task_id}}/result",
+              "host": ["{{base_url}}"],
+              "path": ["orchestrator", "tasks", "{{task_id}}", "result"]
+            }
+          }
+        },
+        {
+          "name": "取消任务",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/orchestrator/tasks/{{task_id}}/cancel",
+              "host": ["{{base_url}}"],
+              "path": ["orchestrator", "tasks", "{{task_id}}", "cancel"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "工作流管理",
+      "item": [
+        {
+          "name": "获取所有工作流",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('获取工作流列表成功', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const response = pm.response.json();",
+                  "    pm.expect(response.success).to.be.true;",
+                  "    pm.expect(response.data.content).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/workflows?page=0&size=10",
+              "host": ["{{base_url}}"],
+              "path": ["workflows"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "创建工作流",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('创建工作流成功', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "    const response = pm.response.json();",
+                  "    pm.expect(response.success).to.be.true;",
+                  "    pm.expect(response.data.id).to.exist;",
+                  "    ",
+                  "    // 保存工作流ID",
+                  "    pm.environment.set('workflow_id', response.data.id);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"测试股票分析工作流\",\n  \"description\": \"用于API测试的股票分析工作流\",\n  \"category\": \"STOCK_ANALYSIS\",\n  \"isPublic\": false,\n  \"nodes\": [\n    {\n      \"id\": \"start\",\n      \"type\": \"START\",\n      \"name\": \"开始\",\n      \"position\": { \"x\": 100, \"y\": 100 }\n    },\n    {\n      \"id\": \"analysis\",\n      \"type\": \"AGENT\",\n      \"name\": \"股票分析\",\n      \"position\": { \"x\": 300, \"y\": 100 },\n      \"config\": {\n        \"agentType\": \"STOCK_ANALYST\",\n        \"prompt\": \"分析指定股票的基本面和技术面\"\n      }\n    },\n    {\n      \"id\": \"end\",\n      \"type\": \"END\",\n      \"name\": \"结束\",\n      \"position\": { \"x\": 500, \"y\": 100 }\n    }\n  ],\n  \"connections\": [\n    {\n      \"id\": \"conn1\",\n      \"sourceNodeId\": \"start\",\n      \"targetNodeId\": \"analysis\"\n    },\n    {\n      \"id\": \"conn2\",\n      \"sourceNodeId\": \"analysis\",\n      \"targetNodeId\": \"end\"\n    }\n  ],\n  \"inputParameters\": [\n    {\n      \"name\": \"symbol\",\n      \"type\": \"STRING\",\n      \"required\": true,\n      \"description\": \"股票代码\"\n    }\n  ],\n  \"outputParameters\": [\n    {\n      \"name\": \"analysis_result\",\n      \"type\": \"OBJECT\",\n      \"description\": \"分析结果\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/workflows",
+              "host": ["{{base_url}}"],
+              "path": ["workflows"]
+            }
+          }
+        },
+        {
+          "name": "执行工作流",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('工作流执行成功', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const response = pm.response.json();",
+                  "    pm.expect(response.success).to.be.true;",
+                  "    pm.expect(response.data.executionId).to.exist;",
+                  "    ",
+                  "    // 保存执行ID",
+                  "    pm.environment.set('execution_id', response.data.executionId);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"input\": {\n    \"symbol\": \"AAPL\"\n  },\n  \"priority\": \"NORMAL\",\n  \"timeout\": 300000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/workflows/{{workflow_id}}/execute",
+              "host": ["{{base_url}}"],
+              "path": ["workflows", "{{workflow_id}}", "execute"]
+            }
+          }
+        },
+        {
+          "name": "获取执行状态",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/workflows/executions/{{execution_id}}/status",
+              "host": ["{{base_url}}"],
+              "path": ["workflows", "executions", "{{execution_id}}", "status"]
+            }
+          }
+        },
+        {
+          "name": "获取执行结果",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/workflows/executions/{{execution_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["workflows", "executions", "{{execution_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "MCP工具管理",
+      "item": [
+        {
+          "name": "获取所有工具",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/mcp/tools",
+              "host": ["{{base_url}}"],
+              "path": ["mcp", "tools"]
+            }
+          }
+        },
+        {
+          "name": "执行工具",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('工具执行成功', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const response = pm.response.json();",
+                  "    pm.expect(response.success).to.be.true;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"toolName\": \"stock_data_fetcher\",\n  \"parameters\": {\n    \"symbol\": \"AAPL\",\n    \"period\": \"1d\"\n  },\n  \"timeout\": 30000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/mcp/tools/execute",
+              "host": ["{{base_url}}"],
+              "path": ["mcp", "tools", "execute"]
+            }
+          }
+        },
+        {
+          "name": "获取工具执行历史",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/mcp/tools/executions?page=0&size=10",
+              "host": ["{{base_url}}"],
+              "path": ["mcp", "tools", "executions"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "系统监控",
+      "item": [
+        {
+          "name": "健康检查",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/actuator/health",
+              "host": ["{{base_url}}"],
+              "path": ["actuator", "health"]
+            }
+          }
+        },
+        {
+          "name": "系统信息",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/actuator/info",
+              "host": ["{{base_url}}"],
+              "path": ["actuator", "info"]
+            }
+          }
+        },
+        {
+          "name": "系统指标",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/actuator/metrics",
+              "host": ["{{base_url}}"],
+              "path": ["actuator", "metrics"]
+            }
+          }
+        },
+        {
+          "name": "获取系统统计",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/system/stats",
+              "host": ["{{base_url}}"],
+              "path": ["system", "stats"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

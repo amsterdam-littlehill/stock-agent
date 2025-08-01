@@ -1,0 +1,422 @@
+.stock-analysis {
+  padding: 24px;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.stock-analysis .ant-card {
+  margin-bottom: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stock-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.stock-basic-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.stock-code {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1890ff;
+}
+
+.stock-name {
+  font-size: 18px;
+  color: #333;
+  margin-left: 8px;
+}
+
+.stock-price {
+  text-align: right;
+}
+
+.current-price {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.price-change {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.price-up {
+  color: #f5222d;
+}
+
+.price-down {
+  color: #52c41a;
+}
+
+.price-flat {
+  color: #666;
+}
+
+.analysis-controls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.analysis-controls .ant-select {
+  min-width: 120px;
+}
+
+.analysis-progress {
+  margin: 16px 0;
+}
+
+.analysis-results {
+  margin-top: 24px;
+}
+
+.result-card {
+  margin-bottom: 16px;
+  border-left: 4px solid #1890ff;
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.result-type {
+  font-size: 16px;
+  font-weight: bold;
+  color: #1890ff;
+}
+
+.confidence-score {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.confidence-bar {
+  width: 60px;
+  height: 6px;
+  background: #f0f0f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.confidence-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #52c41a 0%, #faad14 50%, #f5222d 100%);
+  transition: width 0.3s ease;
+}
+
+.result-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #fafafa;
+  border-radius: 4px;
+}
+
+.result-label {
+  color: #666;
+  font-size: 14px;
+}
+
+.result-value {
+  font-weight: bold;
+  color: #333;
+}
+
+.risk-high {
+  color: #f5222d;
+}
+
+.risk-medium {
+  color: #faad14;
+}
+
+.risk-low {
+  color: #52c41a;
+}
+
+.result-summary {
+  background: #f6ffed;
+  border: 1px solid #b7eb8f;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.result-reasoning {
+  background: #fff7e6;
+  border: 1px solid #ffd591;
+  border-radius: 4px;
+  padding: 12px;
+}
+
+.reasoning-title {
+  font-weight: bold;
+  color: #d46b08;
+  margin-bottom: 8px;
+}
+
+.reasoning-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reasoning-list li {
+  padding: 4px 0;
+  color: #666;
+  position: relative;
+  padding-left: 16px;
+}
+
+.reasoning-list li:before {
+  content: '•';
+  color: #d46b08;
+  position: absolute;
+  left: 0;
+}
+
+.agents-section {
+  margin-top: 24px;
+}
+
+.agent-card {
+  margin-bottom: 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.agent-card:hover {
+  border-color: #1890ff;
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.2);
+}
+
+.agent-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.agent-name {
+  font-weight: bold;
+  color: #333;
+}
+
+.agent-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-active {
+  color: #52c41a;
+}
+
+.status-inactive {
+  color: #d9d9d9;
+}
+
+.agent-content {
+  padding: 16px;
+}
+
+.agent-description {
+  color: #666;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.agent-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.metric-item {
+  text-align: center;
+  padding: 8px;
+  background: #f9f9f9;
+  border-radius: 4px;
+}
+
+.metric-value {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1890ff;
+  display: block;
+}
+
+.metric-label {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.error-container {
+  text-align: center;
+  padding: 40px;
+  color: #f5222d;
+}
+
+.empty-container {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .stock-analysis {
+    padding: 16px;
+  }
+  
+  .stock-info-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .stock-price {
+    text-align: left;
+  }
+  
+  .analysis-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .analysis-controls .ant-select {
+    width: 100%;
+  }
+  
+  .result-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .agent-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 暗色主题支持 */
+@media (prefers-color-scheme: dark) {
+  .stock-analysis {
+    background: #141414;
+  }
+  
+  .stock-analysis .ant-card {
+    background: #1f1f1f;
+    border-color: #303030;
+  }
+  
+  .stock-name {
+    color: #fff;
+  }
+  
+  .result-item {
+    background: #262626;
+  }
+  
+  .result-value {
+    color: #fff;
+  }
+  
+  .agent-header {
+    background: #262626;
+    border-color: #303030;
+  }
+  
+  .agent-name {
+    color: #fff;
+  }
+  
+  .agent-description {
+    color: #bfbfbf;
+  }
+  
+  .metric-item {
+    background: #262626;
+  }
+}
+
+/* 动画效果 */
+.result-card {
+  animation: slideInUp 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.confidence-fill {
+  animation: fillProgress 1s ease-out;
+}
+
+@keyframes fillProgress {
+  from {
+    width: 0;
+  }
+}
+
+/* 滚动条样式 */
+.stock-analysis ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.stock-analysis ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.stock-analysis ::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.stock-analysis ::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

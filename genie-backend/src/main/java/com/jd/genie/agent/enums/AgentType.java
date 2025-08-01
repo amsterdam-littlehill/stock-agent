@@ -8,7 +8,9 @@ public enum AgentType {
     WORKFLOW(2),
     PLAN_SOLVE(3),
     ROUTER(4),
-    REACT(5);
+    REACT(5),
+    RESEARCHER(6),
+    ADVISOR(7);
 
     private final Integer value;
 

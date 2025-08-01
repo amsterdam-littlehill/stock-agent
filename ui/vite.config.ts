@@ -3,8 +3,8 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import tailwindcss from '@tailwindcss/vite';
 
-export default defineConfig(({ command, mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
   return {
     plugins: [
       react(),
@@ -32,6 +32,9 @@ export default defineConfig(({ command, mode }) => {
     define: {
       // 一定要序列化，否则打包时会报错
       SERVICE_BASE_URL: JSON.stringify(env.SERVICE_BASE_URL),
+      // 定义 process 对象以避免浏览器环境中的 ReferenceError
+      'process.env': JSON.stringify(process.env),
+      global: 'globalThis',
     },
     build: {
       outDir: 'dist',
@@ -40,5 +43,5 @@ export default defineConfig(({ command, mode }) => {
       rollupOptions: {output: {inlineDynamicImports: true},},
       cssCodeSplit: false,
     },
-  }
+  };
 });

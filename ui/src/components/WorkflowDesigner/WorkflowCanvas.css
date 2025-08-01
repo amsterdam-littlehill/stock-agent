@@ -1,0 +1,506 @@
+.workflow-canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #fafafa;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+}
+
+.workflow-canvas:active {
+  cursor: grabbing;
+}
+
+/* SVG 画布 */
+.canvas-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 网格 */
+.grid {
+  opacity: 0.5;
+}
+
+/* 边容器 */
+.edges {
+  pointer-events: auto;
+}
+
+/* 节点容器 */
+.nodes-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* 加载状态 */
+.canvas-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 画布信息 */
+.canvas-info {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  line-height: 1.4;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.canvas-info > div {
+  margin-bottom: 2px;
+}
+
+.canvas-info > div:last-child {
+  margin-bottom: 0;
+}
+
+/* 工作流节点样式 */
+.workflow-node {
+  position: absolute;
+  width: 200px;
+  min-height: 100px;
+  background: white;
+  border: 2px solid #d9d9d9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.workflow-node:hover {
+  border-color: #40a9ff;
+  box-shadow: 0 4px 12px rgba(64, 169, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.workflow-node.selected {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  z-index: 20;
+}
+
+.workflow-node.dragging {
+  opacity: 0.8;
+  transform: scale(1.05);
+  z-index: 100;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* 节点头部 */
+.node-header {
+  padding: 8px 12px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #e8e8e8;
+  border-radius: 6px 6px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.node-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.node-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #262626;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.node-type {
+  font-size: 10px;
+  color: #8c8c8c;
+  background: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+/* 节点内容 */
+.node-content {
+  padding: 12px;
+}
+
+.node-description {
+  font-size: 11px;
+  color: #666;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.node-properties {
+  font-size: 10px;
+  color: #8c8c8c;
+}
+
+/* 节点状态 */
+.node-status {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+.node-status.pending {
+  background: #d9d9d9;
+}
+
+.node-status.running {
+  background: #1890ff;
+  animation: pulse 2s infinite;
+}
+
+.node-status.completed {
+  background: #52c41a;
+}
+
+.node-status.failed {
+  background: #ff4d4f;
+}
+
+.node-status.skipped {
+  background: #faad14;
+}
+
+/* 节点连接点 */
+.node-connector {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #1890ff;
+  border: 2px solid white;
+  border-radius: 50%;
+  cursor: crosshair;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 30;
+}
+
+.workflow-node:hover .node-connector {
+  opacity: 1;
+}
+
+.node-connector.input {
+  left: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.node-connector.output {
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.node-connector:hover {
+  background: #40a9ff;
+  transform: translateY(-50%) scale(1.2);
+}
+
+/* 工作流边样式 */
+.workflow-edge {
+  fill: none;
+  stroke: #d9d9d9;
+  stroke-width: 2;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.workflow-edge:hover {
+  stroke: #40a9ff;
+  stroke-width: 3;
+}
+
+.workflow-edge.selected {
+  stroke: #1890ff;
+  stroke-width: 3;
+}
+
+.workflow-edge.error {
+  stroke: #ff4d4f;
+  stroke-dasharray: 5, 5;
+}
+
+/* 边标签 */
+.edge-label {
+  font-size: 10px;
+  fill: #666;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+/* 边箭头 */
+.edge-arrow {
+  fill: #d9d9d9;
+  transition: fill 0.2s ease;
+}
+
+.workflow-edge:hover + .edge-arrow,
+.workflow-edge.selected + .edge-arrow {
+  fill: #1890ff;
+}
+
+/* 连接线 */
+.connection-line {
+  stroke: #1890ff;
+  stroke-width: 2;
+  stroke-dasharray: 5, 5;
+  fill: none;
+  pointer-events: none;
+  animation: dash 1s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+/* 节点类型特定样式 */
+.workflow-node.start {
+  border-color: #52c41a;
+}
+
+.workflow-node.start .node-header {
+  background: #f6ffed;
+  border-bottom-color: #b7eb8f;
+}
+
+.workflow-node.end {
+  border-color: #ff4d4f;
+}
+
+.workflow-node.end .node-header {
+  background: #fff2f0;
+  border-bottom-color: #ffadd2;
+}
+
+.workflow-node.condition {
+  border-color: #faad14;
+  border-radius: 50px;
+}
+
+.workflow-node.condition .node-header {
+  background: #fffbe6;
+  border-bottom-color: #ffe58f;
+  border-radius: 50px 50px 0 0;
+}
+
+.workflow-node.agent {
+  border-color: #722ed1;
+}
+
+.workflow-node.agent .node-header {
+  background: #f9f0ff;
+  border-bottom-color: #d3adf7;
+}
+
+.workflow-node.tool {
+  border-color: #13c2c2;
+}
+
+.workflow-node.tool .node-header {
+  background: #e6fffb;
+  border-bottom-color: #87e8de;
+}
+
+/* 动画效果 */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes flow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 20;
+  }
+}
+
+.workflow-edge.flowing {
+  stroke-dasharray: 5, 5;
+  animation: flow 2s linear infinite;
+}
+
+/* 选择框 */
+.selection-box {
+  position: absolute;
+  border: 1px dashed #1890ff;
+  background: rgba(24, 144, 255, 0.1);
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* 缩放控制 */
+.zoom-controls {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 10;
+}
+
+.zoom-control {
+  width: 32px;
+  height: 32px;
+  background: white;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+.zoom-control:hover {
+  border-color: #40a9ff;
+  color: #1890ff;
+  background: #f0f9ff;
+}
+
+/* 小地图 */
+.minimap {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  width: 200px;
+  height: 120px;
+  background: white;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.minimap-viewport {
+  position: absolute;
+  border: 2px solid #1890ff;
+  background: rgba(24, 144, 255, 0.1);
+  cursor: move;
+}
+
+.minimap-node {
+  position: absolute;
+  background: #1890ff;
+  border-radius: 2px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .workflow-node {
+    width: 160px;
+    min-height: 80px;
+  }
+  
+  .node-header {
+    padding: 6px 8px;
+  }
+  
+  .node-content {
+    padding: 8px;
+  }
+  
+  .node-title {
+    font-size: 11px;
+  }
+  
+  .node-description {
+    font-size: 10px;
+  }
+  
+  .canvas-info {
+    font-size: 10px;
+    padding: 6px 8px;
+  }
+  
+  .minimap {
+    width: 150px;
+    height: 90px;
+  }
+}
+
+/* 无障碍支持 */
+.workflow-node:focus {
+  outline: 2px solid #1890ff;
+  outline-offset: 2px;
+}
+
+.workflow-edge:focus {
+  outline: 2px solid #1890ff;
+  outline-offset: 2px;
+}
+
+/* 打印样式 */
+@media print {
+  .workflow-canvas {
+    background: white;
+  }
+  
+  .canvas-info,
+  .zoom-controls,
+  .minimap {
+    display: none;
+  }
+  
+  .workflow-node {
+    box-shadow: none;
+    border-color: #000;
+  }
+  
+  .workflow-edge {
+    stroke: #000;
+  }
+}

@@ -1,0 +1,9 @@
+<settings>
+        <mirrors>
+          <mirror>
+            <id>aliyun</id>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <mirrorOf>*</mirrorOf> <!-- 匹配所有仓库 -->
+          </mirror>
+        </mirrors>
+      </settings>

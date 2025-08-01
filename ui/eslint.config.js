@@ -5,17 +5,18 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'cypress'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
-    },
-    globals: {
-      REQUEST_BASE_URL: 'readonly',
-      env: 'readonly',
+      globals: {
+        ...globals.browser,
+        REQUEST_BASE_URL: 'readonly',
+        env: 'readonly',
+        SERVICE_BASE_URL: 'readonly',
+      },
     },
     plugins: {
       'react-hooks': reactHooks,
@@ -29,7 +30,7 @@ export default tseslint.config(
       ],
       'semi': ['error', 'always'],
       '@typescript-eslint/no-explicit-any': 'off',
-      'space-infix-ops': 'error' ,
+      'space-infix-ops': 'error',
       'key-spacing': ['error', { beforeColon: false, afterColon: true }],
       'no-multiple-empty-lines': ['error', { max: 1 }],
       'no-trailing-spaces': 'error',
@@ -40,7 +41,6 @@ export default tseslint.config(
       'space-before-blocks': ['error', 'always'],
       'space-in-parens': ['error', 'never'],
       'computed-property-spacing': ['error', 'never'],
-      'key-spacing': ['error', { beforeColon: false, afterColon: true }],
       'comma-spacing': ['error', { before: false, after: true }],
       'block-spacing': 'error',
       'no-whitespace-before-property': 'error',

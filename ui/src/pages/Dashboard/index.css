@@ -1,0 +1,492 @@
+.dashboard {
+  padding: 24px;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.dashboard-header h2 {
+  margin: 0;
+  color: #1890ff;
+}
+
+.dashboard-loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  gap: 16px;
+}
+
+.dashboard-error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  gap: 16px;
+}
+
+.market-overview .ant-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.market-overview .ant-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.portfolio-overview .ant-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.portfolio-overview .ant-card .ant-card-head {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.portfolio-overview .ant-card .ant-card-head-title {
+  color: white;
+  font-weight: bold;
+}
+
+.portfolio-overview .ant-card .ant-btn-link {
+  color: white;
+  border-color: white;
+}
+
+.portfolio-overview .ant-statistic-title {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.portfolio-overview .ant-statistic-content {
+  color: white !important;
+}
+
+.dashboard .ant-card {
+  margin-bottom: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard .ant-card-head {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.dashboard .ant-card-head-title {
+  font-weight: bold;
+  color: #333;
+}
+
+.dashboard .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: bold;
+  color: #333;
+}
+
+.dashboard .ant-table-tbody > tr:hover > td {
+  background: #f5f5f5;
+}
+
+.dashboard .ant-list-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.3s ease;
+}
+
+.dashboard .ant-list-item:hover {
+  background: #f9f9f9;
+}
+
+.dashboard .ant-list-item:last-child {
+  border-bottom: none;
+}
+
+.chart-container {
+  height: 300px;
+  padding: 16px;
+}
+
+.chart-container .g2-tooltip {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+/* 统计卡片样式 */
+.ant-statistic {
+  text-align: center;
+}
+
+.ant-statistic-title {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.ant-statistic-content {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.ant-statistic-content-prefix,
+.ant-statistic-content-suffix {
+  font-size: 16px;
+}
+
+/* 进度条样式 */
+.ant-progress-line {
+  margin: 0;
+}
+
+.ant-progress-text {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 标签样式 */
+.ant-tag {
+  border-radius: 4px;
+  font-size: 12px;
+  padding: 2px 8px;
+  border: none;
+}
+
+/* 表格样式优化 */
+.dashboard .ant-table {
+  font-size: 13px;
+}
+
+.dashboard .ant-table-thead > tr > th {
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+.dashboard .ant-table-tbody > tr > td {
+  padding: 8px 12px;
+}
+
+.dashboard .ant-table-small .ant-table-thead > tr > th {
+  padding: 6px 8px;
+}
+
+.dashboard .ant-table-small .ant-table-tbody > tr > td {
+  padding: 6px 8px;
+}
+
+/* 列表样式优化 */
+.dashboard .ant-list-item-meta-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.dashboard .ant-list-item-meta-description {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 按钮样式 */
+.dashboard .ant-btn {
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.dashboard .ant-btn-link {
+  padding: 0;
+  height: auto;
+  line-height: 1.5;
+}
+
+/* 选择器样式 */
+.dashboard .ant-select {
+  min-width: 100px;
+}
+
+.dashboard .ant-select-selector {
+  border-radius: 4px;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .dashboard {
+    padding: 16px;
+  }
+  
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .chart-container {
+    height: 250px;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 12px;
+  }
+  
+  .dashboard-header h2 {
+    font-size: 20px;
+  }
+  
+  .market-overview .ant-col {
+    margin-bottom: 12px;
+  }
+  
+  .ant-statistic-content {
+    font-size: 20px;
+  }
+  
+  .chart-container {
+    height: 200px;
+    padding: 8px;
+  }
+  
+  .dashboard .ant-table {
+    font-size: 12px;
+  }
+  
+  .dashboard .ant-card-head-title {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  .dashboard {
+    padding: 8px;
+  }
+  
+  .dashboard-header {
+    margin-bottom: 16px;
+  }
+  
+  .dashboard-header h2 {
+    font-size: 18px;
+  }
+  
+  .ant-statistic-content {
+    font-size: 18px;
+  }
+  
+  .ant-statistic-content-prefix,
+  .ant-statistic-content-suffix {
+    font-size: 14px;
+  }
+  
+  .chart-container {
+    height: 180px;
+    padding: 4px;
+  }
+}
+
+/* 暗色主题支持 */
+@media (prefers-color-scheme: dark) {
+  .dashboard {
+    background: #141414;
+  }
+  
+  .dashboard-header {
+    border-bottom-color: #303030;
+  }
+  
+  .dashboard-header h2 {
+    color: #1890ff;
+  }
+  
+  .dashboard .ant-card {
+    background: #1f1f1f;
+    border-color: #303030;
+  }
+  
+  .dashboard .ant-card-head {
+    border-bottom-color: #303030;
+  }
+  
+  .dashboard .ant-card-head-title {
+    color: #fff;
+  }
+  
+  .dashboard .ant-table-thead > tr > th {
+    background: #262626;
+    color: #fff;
+    border-bottom-color: #303030;
+  }
+  
+  .dashboard .ant-table-tbody > tr > td {
+    border-bottom-color: #303030;
+    color: #fff;
+  }
+  
+  .dashboard .ant-table-tbody > tr:hover > td {
+    background: #262626;
+  }
+  
+  .dashboard .ant-list-item {
+    border-bottom-color: #303030;
+  }
+  
+  .dashboard .ant-list-item:hover {
+    background: #262626;
+  }
+  
+  .dashboard .ant-list-item-meta-title {
+    color: #fff;
+  }
+  
+  .dashboard .ant-list-item-meta-description {
+    color: #bfbfbf;
+  }
+  
+  .ant-statistic-title {
+    color: #bfbfbf !important;
+  }
+  
+  .ant-statistic-content {
+    color: #fff !important;
+  }
+}
+
+/* 动画效果 */
+.dashboard .ant-card {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.market-overview .ant-card {
+  animation-delay: 0.1s;
+}
+
+.portfolio-overview .ant-card {
+  animation-delay: 0.2s;
+}
+
+/* 数据加载动画 */
+.ant-statistic-content {
+  transition: all 0.3s ease;
+}
+
+.ant-progress-line {
+  transition: all 0.3s ease;
+}
+
+/* 悬停效果 */
+.dashboard .ant-table-tbody > tr {
+  transition: background 0.2s ease;
+}
+
+.dashboard .ant-list-item {
+  transition: all 0.2s ease;
+}
+
+.dashboard .ant-btn {
+  transition: all 0.2s ease;
+}
+
+/* 滚动条样式 */
+.dashboard ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.dashboard ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.dashboard ::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.dashboard ::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 图表容器优化 */
+.chart-container .g2-tooltip {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: none;
+}
+
+.chart-container .g2-legend {
+  font-size: 12px;
+}
+
+.chart-container .g2-axis-label {
+  font-size: 11px;
+  color: #666;
+}
+
+/* 特殊状态样式 */
+.dashboard .ant-empty {
+  padding: 40px 20px;
+}
+
+.dashboard .ant-spin-container {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 投资组合特殊样式 */
+.portfolio-overview .ant-statistic-content-prefix {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.portfolio-overview .ant-statistic-content-suffix {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 14px;
+}
+
+/* 行业表现特殊样式 */
+.dashboard .ant-list-item-action {
+  margin-left: 16px;
+}
+
+.dashboard .ant-list-item-action > li {
+  padding: 0;
+}
+
+/* 表格行颜色区分 */
+.dashboard .ant-table-tbody > tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+@media (prefers-color-scheme: dark) {
+  .dashboard .ant-table-tbody > tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+  }
+}
